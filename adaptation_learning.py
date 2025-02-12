@@ -8,6 +8,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torch.serialization
 from collections import OrderedDict
 from modeldef import RNN,test
 import os
@@ -20,14 +21,13 @@ def main(name='test',backprop=False, control=False, single_target=False,
     directory = Path.cwd() / 'results'
     name = name
     savname = directory / name
-        
-    dataT = torch.load(savname / 'phase3_training')
+    dataT = torch.load(savname / 'phase3_training', weights_only= False)
     data = np.load(savname / 'data.npy',allow_pickle=True).item()['center-out-reach']
     params = np.load(savname / 'params.npy',allow_pickle=True).item()
  
     # ADAPTATION PARAMETERS #############
     if not backprop:
-        lr = 1e-5
+        lr = 1e-7
         batch_size = 1
         if control:
             ntrials = 210
@@ -38,7 +38,7 @@ def main(name='test',backprop=False, control=False, single_target=False,
         else:
             ntrials = 300
     else:
-        lr = 5e-5
+        lr = 5e-7
         ntrials = 100
         batch_size = params['model']['batch_size']
         
