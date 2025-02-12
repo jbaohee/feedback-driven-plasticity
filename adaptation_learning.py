@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.serialization
+import sklearn
 from collections import OrderedDict
 from modeldef import RNN,test
 import os
