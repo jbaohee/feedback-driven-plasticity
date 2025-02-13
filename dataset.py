@@ -1,5 +1,3 @@
-#!/usr/bin/env python3 3.7.4 project3 env
-# -*- coding: utf-8 -*-
 """
 Toolbox for data creation.
 """
@@ -9,6 +7,8 @@ import numpy as np
 def _prepare_data(start_point,end_point,go_on,vel,tsteps,input_dim,
                   output_dim,dt,stim_range,go_to_peak,stim_on):
     ntrials = start_point.shape[0]
+
+    # sigmoid function with additional factor beta
     def sig(x,beta):
         return 1/(1+np.exp(-x*beta))
     
